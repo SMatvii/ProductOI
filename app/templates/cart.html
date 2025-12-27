@@ -42,7 +42,7 @@
             <div class="item-quantity">
                 <input type="number" id="qty-{{ item.id }}" value="{{ item.quantity }}" min="1" 
                     onchange="updateQuantity({{ item.id }})">
-                <span style="color: #7c3aed; font-weight: bold;">= {{ item.price * item.quantity }}UAH</span>
+                <span style="color: #7c3aed; font-weight: bold;">{{ item.price * item.quantity }} UAH</span>
                 <button class="remove-btn" onclick="removeFromCart({{ item.id }})">Remove</button>
             </div>
         </div>

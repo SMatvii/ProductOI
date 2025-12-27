@@ -3,16 +3,16 @@ from flask import Blueprint, render_template, request, session, jsonify
 main_bp = Blueprint('main', __name__)
 
 PRODUCTS = [
-    {'id': 1, 'name': 'Margherita Pizza', 'category': 'Pizza', 'price': 250, 'image': 'https://source.unsplash.com/800x600/?margherita,pizza'},
-    {'id': 2, 'name': 'Pepperoni Pizza', 'category': 'Pizza', 'price': 280, 'image': 'https://source.unsplash.com/800x600/?pepperoni,pizza'},
-    {'id': 3, 'name': 'Classic Burger', 'category': 'Burgers', 'price': 180, 'image': 'https://source.unsplash.com/800x600/?classic,burger'},
-    {'id': 4, 'name': 'Deluxe Burger', 'category': 'Burgers', 'price': 220, 'image': 'https://source.unsplash.com/800x600/?deluxe,burger'},
-    {'id': 5, 'name': 'Carbonara Pasta', 'category': 'Pasta', 'price': 200, 'image': 'https://source.unsplash.com/800x600/?carbonara,pasta'},
-    {'id': 6, 'name': 'Bolognese Pasta', 'category': 'Pasta', 'price': 210, 'image': 'https://source.unsplash.com/800x600/?bolognese,pasta'},
-    {'id': 7, 'name': 'Caesar Salad', 'category': 'Salads', 'price': 150, 'image': 'https://source.unsplash.com/800x600/?caesar,salad'},
-    {'id': 8, 'name': 'Greek Salad', 'category': 'Salads', 'price': 160, 'image': 'https://source.unsplash.com/800x600/?greek,salad'},
-    {'id': 9, 'name': 'Cola 500ml', 'category': 'Drinks', 'price': 50, 'image': 'https://source.unsplash.com/800x600/?cola,soda'},
-    {'id': 10, 'name': 'Orange Juice', 'category': 'Drinks', 'price': 60, 'image': 'https://source.unsplash.com/800x600/?orange,juice'},
+    {'id': 1, 'name': 'Margherita Pizza', 'category': 'Pizza', 'price': 250, 'image': 'https://cdn.pixabay.com/photo/2014/11/05/15/57/food-518393_640.jpg'},
+    {'id': 2, 'name': 'Pepperoni Pizza', 'category': 'Pizza', 'price': 280, 'image': 'https://cdn.pixabay.com/photo/2021/09/29/09/32/pizza-6664108_640.jpg'},
+    {'id': 3, 'name': 'Classic Burger', 'category': 'Burgers', 'price': 180, 'image': 'https://cdn.pixabay.com/photo/2015/06/24/16/36/burger-817096_640.jpg'},
+    {'id': 4, 'name': 'Deluxe Burger', 'category': 'Burgers', 'price': 220, 'image': 'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_640.jpg'},
+    {'id': 5, 'name': 'Carbonara Pasta', 'category': 'Pasta', 'price': 200, 'image': 'https://cdn.pixabay.com/photo/2021/10/04/15/19/pasta-6680915_640.jpg'},
+    {'id': 6, 'name': 'Bolognese Pasta', 'category': 'Pasta', 'price': 210, 'image': 'https://cdn.pixabay.com/photo/2017/01/11/11/05/pasta-1971406_640.jpg'},
+    {'id': 7, 'name': 'Caesar Salad', 'category': 'Salads', 'price': 150, 'image': 'https://cdn.pixabay.com/photo/2021/10/04/15/53/salad-6680917_640.jpg'},
+    {'id': 8, 'name': 'Greek Salad', 'category': 'Salads', 'price': 160, 'image': 'https://cdn.pixabay.com/photo/2016/06/15/15/25/salad-1459237_640.jpg'},
+    {'id': 9, 'name': 'Cola 500ml', 'category': 'Drinks', 'price': 50, 'image': 'https://cdn.pixabay.com/photo/2021/01/20/16/36/cola-5933803_640.jpg'},
+    {'id': 10, 'name': 'Orange Juice', 'category': 'Drinks', 'price': 60, 'image': 'https://cdn.pixabay.com/photo/2021/01/20/16/36/orange-juice-5933804_640.jpg'},
 ]
 
 CATEGORIES = ['Pizza', 'Burgers', 'Pasta', 'Salads', 'Drinks']
