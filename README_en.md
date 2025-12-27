@@ -86,5 +86,3 @@ http://localhost:5000
 - Admin panel and product management
 
 ---
-
-If you'd like, I can also create a small script to switch the main `README.md` to one of the language files or download and store product images locally.
