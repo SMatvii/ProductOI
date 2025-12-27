@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
-{% block title %}ProductOI - Наш Каталог{% endblock %}
+{% block title %}ProductOI - Catalog{% endblock %}
 
 {% block content %}
 <div class="hero">
-    <h1>ProductOi - Доставка їжі 24/7</h1>
-    <p>Найбільший вибір страв у твоєму місті! Швидко, смачно, надійно.</p>
+    <h1>ProductOI — Food Delivery 24/7</h1>
+    <p>Wide selection of dishes in your city. Fast, tasty, reliable.</p>
 </div>
 
 
 <div class="category-filter">
-    <button class="category-btn active" onclick="filterByCategory('all')">Усі товари</button>
+    <button class="category-btn active" onclick="filterByCategory('all')">All products</button>
     {% for category in categories %}
     <button class="category-btn" onclick="filterByCategory('{{ category }}')">{{ category }}</button>
     {% endfor %}
@@ -20,12 +20,34 @@
     {% for product in products %}
     <div class="product-card" data-category="{{ product.category }}">
         <div class="product-image">
-            <img src="{{ product.image }}" alt="{{ product.name }}">
+            {% if product.image %}
+                {% if product.image.startswith('http') %}
+                    <img src="{{ product.image }}" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='images/' ~ product.image) }}" alt="{{ product.name }}">
+                {% endif %}
+            {% else %}
+                {% set name = product.name|lower %}
+                {% if 'pizza' in name %}
+                    {% set fallback = 'https://source.unsplash.com/400x300/?pizza' %}
+                {% elif 'burger' in name or 'бургер' in name %}
+                    {% set fallback = 'https://source.unsplash.com/400x300/?burger' %}
+                {% elif 'pasta' in name or 'паста' in name or 'спагет' in name %}
+                    {% set fallback = 'https://source.unsplash.com/400x300/?pasta' %}
+                {% elif 'salad' in name or 'салат' in name %}
+                    {% set fallback = 'https://source.unsplash.com/400x300/?salad' %}
+                {% elif 'drink' in name or 'напій' in name or 'сік' in name %}
+                    {% set fallback = 'https://source.unsplash.com/400x300/?drink' %}
+                {% else %}
+                    {% set fallback = 'https://source.unsplash.com/400x300/?food' %}
+                {% endif %}
+                <img src="{{ fallback }}" alt="{{ product.name }}">
+            {% endif %}
         </div>
         <div class="product-info">
             <span class="product-category">{{ product.category }}</span>
             <h3 class="product-name">{{ product.name }}</h3>
-            <p class="product-price">{{ product.price }} грн</p>
+            <p class="product-price">{{ product.price }} UAH</p>
             
             <div class="quantity-control">
                 <button class="qty-btn">−</button>
@@ -34,7 +56,7 @@
             </div>
             
             <button class="btn btn-primary" onclick="addToCart({{ product.id }})">
-                Додати в кошик
+                Add to cart
             </button>
         </div>
     </div>
@@ -42,25 +64,25 @@
 </div>
 
 <section id="about" style="background: white; border-radius: 12px; padding: 2rem; margin-top: 3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-    <h2 style="color: #7c3aed; margin-bottom: 1rem;">Чому ProductOi?</h2>
+    <h2 style="color: #7c3aed; margin-bottom: 1rem;">Why ProductOi?</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
         <div>
-            <h3 style="color: #7c3aed; margin-bottom: 0.5rem;">Швидка доставка</h3>
-            <p>Ваше замовлення буде доставлено за 30-45 хвилин</p>
+            <h3 style="color: #7c3aed; margin-bottom: 0.5rem;">Fast delivery</h3>
+            <p>Your order will arrive in 30–45 minutes</p>
         </div>
         <div>
-            <h3 style="color: #7c3aed; margin-bottom: 0.5rem;">Смачна їжа</h3>
-            <p>Тільки свіжі інгредієнти і якісні страви</p>
+            <h3 style="color: #7c3aed; margin-bottom: 0.5rem;">Delicious food</h3>
+            <p>Only fresh ingredients and high-quality dishes</p>
         </div>
         <div>
-            <h3 style="color: #7c3aed; margin-bottom: 0.5rem;">Доступні ціни</h3>
-            <p>Найкращі ціни з регулярними спеціальними пропозиціями</p>
+            <h3 style="color: #7c3aed; margin-bottom: 0.5rem;">Affordable prices</h3>
+            <p>Great prices with regular special offers</p>
         </div>
     </div>
 </section>
 
 <section id="contact" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); color: white; border-radius: 12px; padding: 2rem; margin-top: 3rem; text-align: center;">
-    <h2 style="margin-bottom: 1rem;">Зв'яжіться з нами</h2>
+    <h2 style="margin-bottom: 1rem;">Contact us</h2>
     <p style="font-size: 1.1rem; margin-bottom: 1rem;">+38 (000) 000-00-00</p>
     <p>info@productoi.ua</p>
 </section>

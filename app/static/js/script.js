@@ -113,7 +113,6 @@ function showNotification(message) {
     }, 2000);
 }
 
-// Фільтрація по категоріям
 function filterByCategory(category) {
     const buttons = document.querySelectorAll('.category-btn');
     buttons.forEach(btn => btn.classList.remove('active'));
@@ -133,7 +132,6 @@ function filterByCategory(category) {
     }
 }
 
-// Обробка замовлення
 function placeOrder(event) {
     event.preventDefault();
     
@@ -221,7 +219,6 @@ function showOrderConfirmation(order) {
     document.body.insertAdjacentHTML('beforeend', html);
 }
 
-// Додавання стилів для анімацій
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
@@ -248,7 +245,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Обробка натиснення кількості товарів
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.quantity-control').forEach(control => {
         const decreaseBtn = control.querySelector('.qty-btn:first-child');

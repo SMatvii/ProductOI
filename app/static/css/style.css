@@ -22,7 +22,6 @@ body {
     line-height: 1.6;
 }
 
-/* HEADER & NAVIGATION */
 header {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-purple) 100%);
     color: white;
@@ -90,14 +89,12 @@ nav a:hover {
     font-weight: bold;
 }
 
-/* MAIN CONTAINER */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
 }
 
-/* HERO SECTION */
 .hero {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-purple) 100%);
     color: white;
@@ -120,7 +117,6 @@ nav a:hover {
     margin-bottom: 2rem;
 }
 
-/* CATEGORY FILTER */
 .category-filter {
     display: flex;
     gap: 1rem;
@@ -148,7 +144,6 @@ nav a:hover {
     box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
 }
 
-/* PRODUCTS GRID */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -254,7 +249,6 @@ nav a:hover {
     border-radius: 5px;
 }
 
-/* BUTTONS */
 .btn {
     padding: 0.8rem 1.5rem;
     border: none;
@@ -290,7 +284,6 @@ nav a:hover {
     color: white;
 }
 
-/* CART PAGE */
 .cart-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -387,7 +380,6 @@ nav a:hover {
     justify-content: space-between;
 }
 
-/* CHECKOUT PAGE */
 .checkout-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -485,6 +477,22 @@ nav a:hover {
     filter: brightness(0) saturate(100%);
 }
 
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.order-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: var(--light-purple);
+    padding: 6px;
+    border: 1px solid var(--border-color);
+}
+
 .option.payment-with-image {
     display: flex;
     align-items: center;
@@ -494,7 +502,6 @@ nav a:hover {
     margin-right: 0.75rem;
 }
 
-/* FOOTER */
 footer {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-purple) 100%);
     color: white;
@@ -503,7 +510,6 @@ footer {
     margin-top: 3rem;
 }
 
-/* EMPTY CART MESSAGE */
 .empty-message {
     text-align: center;
     padding: 3rem 1rem;
@@ -521,7 +527,6 @@ footer {
     margin-bottom: 2rem;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
     .cart-container,
     .checkout-container {
@@ -553,7 +558,6 @@ footer {
     }
 }
 
-/* SUCCESS MESSAGE */
 .success-message {
     background-color: #d1fae5;
     border-left: 4px solid #10b981;

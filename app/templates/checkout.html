@@ -1,105 +1,127 @@
 {% extends "base.html" %}
 
-{% block title %}ProductOI - Оформлення замовлення{% endblock %}
+{% block title %}ProductOI - Checkout{% endblock %}
 
 {% block content %}
-<h1 style="color: #7c3aed; margin-bottom: 2rem;">Оформлення замовлення</h1>
+<h1 style="color: #7c3aed; margin-bottom: 2rem;">Checkout</h1>
 
 <div class="checkout-container">
     <div>
         <div class="form-section">
-            <h2>Ваші дані</h2>
+            <h2>Your details</h2>
             <form id="checkoutForm" onsubmit="placeOrder(event)">
                 <div class="form-group">
-                    <label for="name">Ім'я *</label>
-                    <input type="text" id="name" name="name" required placeholder="Петро Іванов">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe">
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Телефон *</label>
+                    <label for="phone">Phone *</label>
                     <input type="tel" id="phone" name="phone" required placeholder="+38(0XX)XXX-XX-XX">
                 </div>
 
                 <div class="form-group">
-                    <label for="address">Адреса доставки *</label>
-                    <input type="text" id="address" name="address" required placeholder="вул. Київська, 123, кв. 45">
+                    <label for="address">Delivery address *</label>
+                    <input type="text" id="address" name="address" required placeholder="123 Kyiv St, Apt 45">
                 </div>
 
                 <div class="form-group">
-                    <label for="notes">Примітка до замовлення</label>
-                    <textarea id="notes" name="notes" placeholder="Наприклад, без гострого, додати більше часнику..."></textarea>
+                    <label for="notes">Order notes</label>
+                    <textarea id="notes" name="notes" placeholder="E.g., no spicy, add extra garlic..."></textarea>
                 </div>
 
-                <!-- Варіанти доставки -->
                 <div class="form-group">
-                    <label>Спосіб доставки *</label>
+                    <label>Delivery method *</label>
                     <div class="delivery-options">
                         <label class="option">
                             <input type="radio" name="delivery" value="express" checked>
                             <div>
-                                <strong>Експрес доставка (30-45 хв)</strong>
-                                <p style="margin: 0; font-size: 0.9rem; color: #7c3aed;">+50 грн</p>
+                                <strong>Express delivery (30-45 min)</strong>
+                                <p style="margin: 0; font-size: 0.9rem; color: #7c3aed;">+50 UAH</p>
                             </div>
                         </label>
                         <label class="option">
                             <input type="radio" name="delivery" value="standard">
                             <div>
-                                <strong>Стандартна доставка (1-2 години)</strong>
-                                <p style="margin: 0; font-size: 0.9rem; color: #7c3aed;">+30 грн</p>
+                                <strong>Standard delivery (1-2 hours)</strong>
+                                <p style="margin: 0; font-size: 0.9rem; color: #7c3aed;">+30 UAH</p>
                             </div>
                         </label>
                         <label class="option">
                             <input type="radio" name="delivery" value="pickup">
                             <div>
-                                <strong>Самовивіз зі ресторану</strong>
-                                <p style="margin: 0; font-size: 0.9rem; color: #10b981;">Безплатно</p>
+                                <strong>Pickup from restaurant</strong>
+                                <p style="margin: 0; font-size: 0.9rem; color: #10b981;">Free</p>
                             </div>
                         </label>
                     </div>
                 </div>
 
-                <!-- Способи оплати -->
                 <div class="form-group">
-                    <label>Спосіб оплати *</label>
+                    <label>Payment method *</label>
                     <div class="payment-options">
                         <label class="option">
                             <input type="radio" name="payment" value="card" checked>
-                            <span>💳 Карта</span>
+                            <span>💳 Card</span>
                         </label>
                         <label class="option">
                             <input type="radio" name="payment" value="cash">
-                            <span>💵 Готівка при доставці</span>
+                            <span>💵 Cash on delivery</span>
                         </label>
                         <label class="option payment-with-image">
                             <input type="radio" name="payment" value="apple">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Apple_logo.svg" alt="Apple Pay" class="payment-icon">
+                            <img src="{{ payment_images.apple if payment_images and payment_images.apple else url_for('static', filename='images/apple-pay.svg') }}" alt="Apple Pay" class="payment-icon">
                             <span>Apple Pay</span>
                         </label>
                         <label class="option payment-with-image">
                             <input type="radio" name="payment" value="google">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Pay" class="payment-icon">
+                            <img src="{{ payment_images.google if payment_images and payment_images.google else url_for('static', filename='images/google-pay.svg') }}" alt="Google Pay" class="payment-icon">
                             <span>Google Pay</span>
                         </label>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Оформити замовлення</button>
+                <button type="submit" class="btn btn-primary">Place order</button>
             </form>
         </div>
     </div>
 
-    <!-- Резюме замовлення -->
     <div>
         <div class="form-section">
-            <h2>Ваше замовлення</h2>
+            <h2>Your order</h2>
             
             {% for item in cart %}
             <div style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #e5e7eb;">
-                <div>
-                    <div style="font-weight: 600;">{{ item.name }}</div>
-                    <div style="color: #6b7280; font-size: 0.9rem;">x{{ item.quantity }}</div>
+                <div class="order-item">
+                    {% if item.image %}
+                        {% if item.image.startswith('http') %}
+                            <img src="{{ item.image }}" alt="{{ item.name }}" class="order-thumb">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="{{ item.name }}" class="order-thumb">
+                        {% endif %}
+                    {% else %}
+                        {% set name = item.name|lower %}
+                        {% if 'pizza' in name %}
+                            {% set fallback = 'https://source.unsplash.com/400x300/?pizza' %}
+                        {% elif 'burger' in name or 'бургер' in name %}
+                            {% set fallback = 'https://source.unsplash.com/400x300/?burger' %}
+                        {% elif 'pasta' in name or 'паста' in name or 'спагет' in name %}
+                            {% set fallback = 'https://source.unsplash.com/400x300/?pasta' %}
+                        {% elif 'salad' in name or 'салат' in name %}
+                            {% set fallback = 'https://source.unsplash.com/400x300/?salad' %}
+                        {% elif 'drink' in name or 'напій' in name or 'сік' in name %}
+                            {% set fallback = 'https://source.unsplash.com/400x300/?drink' %}
+                        {% else %}
+                            {% set fallback = 'https://source.unsplash.com/400x300/?food' %}
+                        {% endif %}
+                        <img src="{{ fallback }}" alt="{{ item.name }}" class="order-thumb">
+                    {% endif %}
+                    <div>
+                        <div style="font-weight: 600;">{{ item.name }}</div>
+                        <div style="color: #6b7280; font-size: 0.9rem;">x{{ item.quantity }}</div>
+                    </div>
                 </div>
-                <div style="color: #7c3aed; font-weight: 600;">{{ item.price * item.quantity }} грн</div>
+                        <div style="color: #7c3aed; font-weight: 600;">{{ item.price * item.quantity }} UAH</div>
             </div>
             {% endfor %}
 
@@ -109,19 +131,19 @@
             {% endfor %}
 
             <div style="display: flex; justify-content: space-between; padding: 1.5rem 0; border-top: 2px solid #7c3aed; margin-top: 1rem;">
-                <div style="font-size: 1.2rem; font-weight: bold; color: #7c3aed;">РАЗОМ:</div>
-                <div style="font-size: 1.2rem; font-weight: bold; color: #7c3aed;">{{ total }} грн</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #7c3aed;">TOTAL:</div>
+                <div style="font-size: 1.2rem; font-weight: bold; color: #7c3aed;">{{ total }} UAH</div>
             </div>
 
             <div style="background-color: #ede9fe; padding: 1rem; border-radius: 8px; margin-top: 1rem; color: #5b21b6;">
                 <p style="margin: 0; font-size: 0.9rem;">
-                    ✓ Гарантія якості<br>
-                    ✓ Безпечна доставка<br>
-                    ✓ Легкі повернення
+                    ✓ Quality guarantee<br>
+                    ✓ Safe delivery<br>
+                    ✓ Easy returns
                 </p>
             </div>
 
-            <a href="/cart" class="btn btn-secondary" style="margin-top: 1rem;">Повернутись до кошика</a>
+            <a href="/cart" class="btn btn-secondary" style="margin-top: 1rem;">Back to cart</a>
         </div>
     </div>
 </div>
