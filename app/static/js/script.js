@@ -1,4 +1,3 @@
-// Управління кошиком
 function addToCart(productId) {
     const quantity = parseInt(document.querySelector(`#qty-${productId}`).value) || 1;
     
@@ -269,3 +268,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+

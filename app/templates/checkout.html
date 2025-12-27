@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}ProductOi - Оформлення замовлення{% endblock %}
+{% block title %}ProductOI - Оформлення замовлення{% endblock %}
 
 {% block content %}
-<h1 style="color: #7c3aed; margin-bottom: 2rem;">📋 Оформлення замовлення</h1>
+<h1 style="color: #7c3aed; margin-bottom: 2rem;">Оформлення замовлення</h1>
 
 <div class="checkout-container">
     <div>
-        <!-- Контактна інформація -->
         <div class="form-section">
-            <h2>👤 Ваші дані</h2>
+            <h2>Ваші дані</h2>
             <form id="checkoutForm" onsubmit="placeOrder(event)">
                 <div class="form-group">
                     <label for="name">Ім'я *</label>
@@ -33,7 +32,7 @@
 
                 <!-- Варіанти доставки -->
                 <div class="form-group">
-                    <label>🚗 Спосіб доставки *</label>
+                    <label>Спосіб доставки *</label>
                     <div class="delivery-options">
                         <label class="option">
                             <input type="radio" name="delivery" value="express" checked>
@@ -61,23 +60,25 @@
 
                 <!-- Способи оплати -->
                 <div class="form-group">
-                    <label>💳 Спосіб оплати *</label>
+                    <label>Спосіб оплати *</label>
                     <div class="payment-options">
                         <label class="option">
                             <input type="radio" name="payment" value="card" checked>
-                            <span>🏦 Карта</span>
+                            <span>💳 Карта</span>
                         </label>
                         <label class="option">
                             <input type="radio" name="payment" value="cash">
                             <span>💵 Готівка при доставці</span>
                         </label>
-                        <label class="option">
+                        <label class="option payment-with-image">
                             <input type="radio" name="payment" value="apple">
-                            <span>🍎 Apple Pay</span>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Apple_logo.svg" alt="Apple Pay" class="payment-icon">
+                            <span>Apple Pay</span>
                         </label>
-                        <label class="option">
+                        <label class="option payment-with-image">
                             <input type="radio" name="payment" value="google">
-                            <span>🔵 Google Pay</span>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Pay" class="payment-icon">
+                            <span>Google Pay</span>
                         </label>
                     </div>
                 </div>
@@ -90,7 +91,7 @@
     <!-- Резюме замовлення -->
     <div>
         <div class="form-section">
-            <h2>📦 Ваше замовлення</h2>
+            <h2>Ваше замовлення</h2>
             
             {% for item in cart %}
             <div style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid #e5e7eb;">
@@ -120,7 +121,7 @@
                 </p>
             </div>
 
-            <a href="/cart" class="btn btn-secondary" style="margin-top: 1rem;">⬅️ Повернутись до кошика</a>
+            <a href="/cart" class="btn btn-secondary" style="margin-top: 1rem;">Повернутись до кошика</a>
         </div>
     </div>
 </div>

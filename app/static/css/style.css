@@ -7,6 +7,8 @@
     --border-color: #e5e7eb;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +16,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f9fafb;
     color: var(--text-dark);
     line-height: 1.6;
@@ -46,6 +48,7 @@ nav {
     letter-spacing: 1px;
     text-decoration: none;
     color: white;
+    font-family: 'Playfair Display', serif;
 }
 
 nav ul {
@@ -108,6 +111,8 @@ nav a:hover {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
 }
 
 .hero p {
@@ -173,14 +178,19 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
     overflow: hidden;
     position: relative;
 }
 
-.product-image::before {
-    content: attr(data-emoji);
-    font-size: 4rem;
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
 }
 
 .product-info {
@@ -203,6 +213,7 @@ nav a:hover {
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: var(--text-dark);
+    font-family: 'Poppins', sans-serif;
 }
 
 .product-price {
@@ -466,6 +477,23 @@ nav a:hover {
     background-color: var(--light-purple);
 }
 
+.payment-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    margin-right: 0.5rem;
+    filter: brightness(0) saturate(100%);
+}
+
+.option.payment-with-image {
+    display: flex;
+    align-items: center;
+}
+
+.option.payment-with-image input[type="radio"] {
+    margin-right: 0.75rem;
+}
+
 /* FOOTER */
 footer {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-purple) 100%);
@@ -542,4 +570,9 @@ footer {
     padding: 1rem;
     border-radius: 8px;
     margin-bottom: 2rem;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
 }
