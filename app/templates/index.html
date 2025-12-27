@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}ProductOi - Наш Каталог{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>🍕 ProductOi - Доставка їжі 24/7</h1>
+    <p>Найбільший вибір страв у твоєму місті! Швидко, смачно, надійно.</p>
+</div>
+
+<!-- Категорії -->
+<div class="category-filter">
+    <button class="category-btn active" onclick="filterByCategory('all')">Усі товари</button>
+    {% for category in categories %}
+    <button class="category-btn" onclick="filterByCategory('{{ category }}')">{{ category }}</button>
+    {% endfor %}
+</div>
+
+<!-- Товари -->
+<div class="products-grid">
+    {% for product in products %}
+    <div class="product-card" data-category="{{ product.category }}">
+        <div class="product-image" data-emoji="
+            {% if 'Піца' in product.name %}🍕
+            {% elif 'Бургер' in product.name %}🍔
+            {% elif 'Паста' in product.name %}🍝
+            {% elif 'Салат' in product.name %}🥗
+            {% elif 'Напої' in product.name %}🥤
+            {% else %}🍽️{% endif %}
+        "></div>
+        <div class="product-info">
+            <span class="product-category">{{ product.category }}</span>
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-price">{{ product.price }} грн</p>
+            
+            <div class="quantity-control">
+                <button class="qty-btn">−</button>
+                <input type="number" id="qty-{{ product.id }}" class="quantity" value="1" min="1">
+                <button class="qty-btn">+</button>
+            </div>
+            
+            <button class="btn btn-primary" onclick="addToCart({{ product.id }})">
+                Додати в кошик
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Інформаційна секція -->
+<section id="about" style="background: white; border-radius: 12px; padding: 2rem; margin-top: 3rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    <h2 style="color: #7c3aed; margin-bottom: 1rem;">Чому ProductOi?</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+        <div>
+            <h3 style="color: #7c3aed; margin-bottom: 0.5rem;">⚡ Швидка доставка</h3>
+            <p>Ваше замовлення буде доставлено за 30-45 хвилин</p>
+        </div>
+        <div>
+            <h3 style="color: #7c3aed; margin-bottom: 0.5rem;">😋 Смачна їжа</h3>
+            <p>Тільки свіжі інгредієнти і якісні страви</p>
+        </div>
+        <div>
+            <h3 style="color: #7c3aed; margin-bottom: 0.5rem;">💰 Доступні ціни</h3>
+            <p>Найкращі ціни з регулярними спеціальними пропозиціями</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); color: white; border-radius: 12px; padding: 2rem; margin-top: 3rem; text-align: center;">
+    <h2 style="margin-bottom: 1rem;">📞 Зв'яжіться з нами</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 1rem;">+38 (000) 000-00-00</p>
+    <p>📧 info@productoi.ua</p>
+</section>
+{% endblock %}

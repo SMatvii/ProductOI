@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ProductOi - Доставка їжі{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">🚀 ProductOi</a>
+            <ul>
+                <li><a href="/">Меню</a></li>
+                <li><a href="/#about">Про нас</a></li>
+                <li><a href="/#contact">Контакти</a></li>
+                <li><a href="/cart" class="cart-icon">
+                    🛒
+                    <span class="cart-count">{{ cart_count }}</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ProductOi - Доставка їжі у твоє місто | 📞 +38(000)000-00-00</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

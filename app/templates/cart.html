@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}ProductOi - Кошик{% endblock %}
+
+{% block content %}
+<h1 style="color: #7c3aed; margin-bottom: 2rem;">🛒 Ваш кошик</h1>
+
+{% if cart %}
+<div class="cart-container">
+    <div class="cart-items">
+        {% for item in cart %}
+        <div class="cart-item">
+            <div class="item-details">
+                <div class="item-name">{{ item.name }}</div>
+                <div class="item-price">{{ item.price }} грн</div>
+            </div>
+            <div class="item-quantity">
+                <input type="number" id="qty-{{ item.id }}" value="{{ item.quantity }}" min="1" 
+                       onchange="updateQuantity({{ item.id }})">
+                <span style="color: #7c3aed; font-weight: bold;">= {{ item.price * item.quantity }} грн</span>
+                <button class="remove-btn" onclick="removeFromCart({{ item.id }})">Видалити</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cart-summary">
+        <h2 style="margin-bottom: 1.5rem;">Разом до сплати</h2>
+        {% set total = 0 %}
+        {% for item in cart %}
+            {% set total = total + (item.price * item.quantity) %}
+        {% endfor %}
+        <div class="summary-item">
+            <span>Вартість товарів:</span>
+            <span>{{ total }} грн</span>
+        </div>
+        <div class="summary-item">
+            <span>Доставка:</span>
+            <span>За тарифом</span>
+        </div>
+        <div class="summary-total">
+            <span>РАЗОМ:</span>
+            <span>{{ total }} грн</span>
+        </div>
+        <a href="/checkout" class="btn btn-primary" style="margin-top: 2rem;">Оформити замовлення</a>
+        <a href="/" class="btn btn-secondary" style="margin-top: 1rem;">Продовжити покупки</a>
+    </div>
+</div>
+{% else %}
+<div class="empty-message">
+    <h2>Ваш кошик порожній 😢</h2>
+    <p>Додайте товари зі своїм улюбленим смаком</p>
+    <a href="/" class="btn btn-primary" style="display: inline-block;">Перейти до каталогу</a>
+</div>
+{% endif %}
+{% endblock %}
